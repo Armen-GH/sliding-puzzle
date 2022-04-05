@@ -32,20 +32,17 @@ public class BreadthFirstSearch {
     }
 
     public void printPathTo(Node node) {
-        if (node.getParent().isPresent()) {
-            printPathTo(node.getParent().get());
-        }
+        node.getParent().ifPresent(parentNode -> printPathTo(parentNode));
         System.out.println(node);
     }
 
     public static void main(String[] args) {
         var bfs = new BreadthFirstSearch();
         var result = bfs.search(new PuzzleState());
-        if (result.isPresent()) {
-            bfs.printPathTo(result.get());
-        } else {
-            System.out.println("No solution found");
-        }
+        result.ifPresentOrElse(
+                node -> bfs.printPathTo(node),
+                () -> System.out.println("No solution found")
+        );
     }
 
 }
