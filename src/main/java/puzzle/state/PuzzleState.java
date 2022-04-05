@@ -222,10 +222,7 @@ public class PuzzleState implements Cloneable {
         if (o == this) {
             return true;
         }
-        if (!(o instanceof PuzzleState)) {
-            return false;
-        }
-        return Arrays.equals(positions, ((PuzzleState) o).positions);
+        return (o instanceof PuzzleState ps) && Arrays.equals(positions, ps.positions);
     }
 
     @Override
